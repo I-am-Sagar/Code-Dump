@@ -2,14 +2,12 @@
 Trying to keep a daily log of things I learn. 
 <br/>
 
-<details open>
+<details>
 <summary><b>Day 1 - 14th Feb, 2022</b></summary>
 <br>
-
 Started learning NLP. Resource I am referring is the playlist on NLP by Pushpak Bhattacharya, IIT-B. 
 
 * [Introduction to NLP & Stages of NLP](learning-content/day1.md)
-
 </details>
 
 <details>

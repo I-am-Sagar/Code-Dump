@@ -61,6 +61,8 @@ The silver (text only) and gold (audio and visual) prizes have never been won. H
 
 Artificial Linguistic Internet Computer Entity (A.L.I.C.E.) has won the bronze award on three occasions in recent times (2000, 2001, 2004). Learning AI Jabberwacky won in 2005 and 2006.
 
+<hr/>
+
 #### Stages of Language Processing
 
 What makes NLP so challenging is the ambiguity. But before deep diving into how to work around ambiguity, we need to understand the stages of language processing. There are in all 7 stages, as mentioned below.
@@ -100,3 +102,74 @@ We need to work with all the different forms of the same root word. There are mo
 
 **Lexical Analysis**
 
+This refers to the dictionary access and obtaining the properties of the word. 
+
+For example, when the input "Dog" is given as word, we get the output as - 
+* noun (lexical property)
+* append 's' to make plural (morph property) 
+* It is a 4-legged carnivorous animal (semantic property) 
+
+Dictionary/Lexicon forms the heart of the NLP. Suppose the input given was "Dogs are running". If it was a speech signal, phoetics stage will process it and convert it in text format. Now in morphological stage, this text goes. From the word "Dogs", the root word is extracted by removing prefixes & suffixes. So here "s" is stripped to get the root word "dog". Similarly, "running" word will get converted to its root form "run". These roots are proceeded for further analysis. Since we are eliminating some very important details like plural form of the noun, tense of the verb, etc. during morph analysis, we need to have a lexicon that stores these properties. So that in future, we can use these properties to present the output in a better way. 
+
+The main challenge in Lexical Analysis is _"Word Sense Disambiguation"_. 
+
+* Part of Speech (PoS) Disambiguation: Same word can be used as different part of speech. Eg. "_Love_ is in the air." (noun) vs. "I _love_ you." (verb)
+
+* Sense Disambiguation: Same word can be used in two different meanings. Eg. "I deposited my paycheck at the _bank_." vs. "The children are playing near the _bank_." Another example, "That coal _mine_ is _mine_."
+
+* Metonymy/ Word relationships: When a word is substituted for another word but still implying the same meaning. Eg. "_The chair_ emphasized the need for adult education.", "The entire _auditorium_ was in awe.", "That's a _ground-breaking_ research.", etc. Here, we know that it is not the chair (the wooden item) but the person/set of persons in authority who emphasized on the adult education. Similarly, it is not the auditorium which was in awe, but the audience in the auditorium. And we make such name-changes casually during conversations. 
+
+**Syntactic Analysis**
+
+Uptil now, we have processed the words. Now we come at the stage where we need to process phrases and sentences. 
+
+In the following image, sentence S is broken in a tree-structure. The sentence is divided into two parts - noun phrase (NP) and verb phrase (VP). VP can be further divided into smaller VP & preposition phrase (PP). 
+
+<img src="../img/syntax_structure.png" width="450">
+
+Challenges in the syntactic processing are related to the structural ambiguity. 
+
+* Scope: We need to know for how long in a sentence the scope of the word is valid. Eg. "The old men and women were taken to safe locations." Here the ambiguity is "(old men and women)" - meaning both men & women which are old vs. "((old men) and women)" - meaning men which are old and all women. Here is one more example, in which different scoping can completely reverse the meaning of the sentence. "No smoking areas will allow Hookas inside." In this "(No) (smoking areas)" - meaning all smoking areas will prohibit Hookas vs. "(No smoking areas)" - meaning no-smoking areas will permit Hookas. 
+
+* Preposition Phrase Attachment: Here there is an ambiguity of determining _to which noun in the sentence, the preposition phrase belongs to._ Eg. "I saw the boy with a telescope." Here the ambiguity is - _who has the telescope?_ However the similar sentence, "I saw the mountain with a telescope." is unambiguous because mountain can't use the telescope; so it is definitely me having the telescope. Another example is, "After 20 years, Government paid 20 lakhs to father for causing son's death." Here the ambiguity is - _who was responsible for son's death?_ We know it was the government in this case because the other meaning is unacceptable. However, there is no stopping from attaching that phrase to father as well. Few more are: "The cameraman shot the man with the gun when he was near Kennedy.", "Aid for kins of cops killed in terrorist attacks.", etc. 
+
+**Semantic Analysis**
+
+This involves the representation of the sentence tree in terms of predicate calculus, semantic nets, frames, conceptual dependencies or scripts. This stage starts creating the knowledge representation of the sentence. 
+
+Eg. Consider the sentence "John gave a book to Mary." Here, the information of this sentence can be decomposed into following way: {Action: Give, Agent (i.e. who is performing the action): John, Object: Book, Recipient: Mary}.
+
+The challenge in semantic analysis is mainly in ambiguous semantic role labelling. 
+
+* Semantic Role Labelling: Consider the sentence "Visiting aunts can be a nuisance.". The sentence can be interpreted in two ways. First is, _aunts who are coming to visit are nuisance._ In this case, {Action: Visit, Agent: Aunt, Object: The visitor}. Second is, _we are visiting aunts and the visits are nuisance._ In this case, {Action: Visit, Agent: The visitor, Object: Aunts}. An example in Hindi, "aapko mujhe mithai khilaani padegi." Here the action is "khilaana" - to make someone eat. But the ambiguity is still there - _who is asking whom to eat the sweets? Am I saying that I ought to make you eat the sweets? Or you are ought to make me eat the sweets?_ This is unclear. 
+
+**Pragmatics**
+
+This is a very hard problem in NLP. The goal of pragmatics is to understand the hidden meaning intended by the speaker but not directly expressed in words. 
+
+Eg. Consider the following piece of conversation. 
+
+* Tourist (in a hurry, checking out of the hotel, calling the service boy): _Hey boy! Please go upstairs and see if my shoes are still there in the room. Don't be late for I have to catch the train in 15 minutes._
+* Service boy (ran upstairs & came down panting): _Yes Sir, they are there._
+
+From the above piece of conversation we know that the tourist wanted the service boy to bring those shoes if they are there, however he didn't expressed that explicitly. That intention was hidden. So technically the service boy gave the right answer and did as instructed. Understanding the hidden intention is the pragmatics part. 
+
+Another example could be, asking your friend "Is there any water left in your bottle?" The intention is not to ask if there is water in the bottle or not, but surely you want to have that water and hence, it is a request instead. If your friend just answers yes or no and then does nothing, then there is a pragmatics failure. 
+
+**Discourse**
+
+This is concerned with the processing of sequence of sentences. So far, our analysis was restricted to only one sentence.  
+
+Eg. Consider the following conversation.
+
+* Mother: _John, Go to school. It is open today. You shouldn't bunk. Father will be very angry._
+
+In this sequence of sentences, if we consider each single sentence as separate entity, there are so many things which are ambiguous. Eg. _What is open today?, Who is the mother addressing with 'you'? What should I not bunk? Why will the father be angry? Does father here mean 'a parent' or 'the headmaster'?_ 
+
+So here the ambiguity is resolved when we consider the sequence/chain of sentences. 
+
+Another example could be, "_John was returning from the school dejected. Today was his math test._" Here, the reasoning lies after the sentence unlike in the previous example. 
+
+In the next sessions, we will learn about NLP and how we can work to resolve the above mentioned challenges. 
+
+<hr/>
