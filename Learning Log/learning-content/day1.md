@@ -63,7 +63,7 @@ Artificial Linguistic Internet Computer Entity (A.L.I.C.E.) has won the bronze a
 
 <hr/>
 
-#### Stages of Language Processing
+### Stages of Language Processing
 
 What makes NLP so challenging is the ambiguity. But before deep diving into how to work around ambiguity, we need to understand the stages of language processing. There are in all 7 stages, as mentioned below.
 
